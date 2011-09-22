@@ -49,7 +49,9 @@ console.log(html);
 
 ### bleach.sanitize(html, options)
 
-Options may contain the following optional attributes:
+Runs HTML through sanitizer and returns sanitized HTML as string.
+
+`options` may contain the following optional attributes:
 
 *   `mode` may be set to `'white'` or `'black'`
 *   `list` is an array containing tags to match against
