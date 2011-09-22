@@ -1,6 +1,6 @@
 # bleach
 
-Sanitize your HTML!
+Sanitize your HTML the easy way!
 
 ![bleach](http://i.imgur.com/9qSfd.png)
 
@@ -16,14 +16,43 @@ Basic:
 
 var bleach = require('bleach');
 
-var html = bleach.sanitize('');
+var html = bleach.sanitize(aBunchOfHTML);
 
 console.log(html);
-
 ````
 
 Advanced:
 
+````javascript
+
+var bleach = require('bleach');
+
+var whitelist = [
+  'a',
+  'b',
+  'i',
+  'em',
+  'strong'
+]
+
+var options = {
+  mode: 'white',
+  list: whitelist
+}
+
+var html = bleach.sanitize(aBunchOfHTML);
+
+console.log(html);
+````
+
 ## usage
 
-Coming soon.
+### bleach.sanitize(html, options)
+
+Options may contain the following optional attributes:
+
+  `mode` may be set to `'white'` or `'black'`
+  `list` is an array containing tags to match against
+
+`white`mode will remove all tags from `html`, excluding those in `list`
+`black`mode will remove all tags found in `list` that are found in `html`
