@@ -77,7 +77,7 @@ Will extract all tags from HTML and return an array of JSON objects. Example ret
 ]
 ````
 
-## License
+## license
 
 (The MIT License)
 
