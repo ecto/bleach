@@ -77,6 +77,14 @@ Will extract all tags from HTML and return an array of JSON objects. Example ret
 ]
 ````
 
+### bleach.youtube(html)
+
+Convert valid YouTube flash embeds into HTML5-compliant iframe embeds.
+
+````javascript
+var html = bleach.youtube(html);
+````
+
 ## license
 
 (The MIT License)
