@@ -8,6 +8,10 @@ Sanitize your HTML the easy way!
 
     npm install bleach
 
+## test
+
+    vows --spec test/*
+
 ## example
 
 Basic:
