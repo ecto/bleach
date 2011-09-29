@@ -55,7 +55,7 @@ vows.describe('bleach').addBatch({
     },
     'whitelist is respected': function(sanitize){
       var whitelist = ['br'],
-          input     = '<html><body><p>hello<br />world!</p></body></html>',
+          input     = '<html><body><p>hello<br />world!</p></body></html><script type="text/javascript" />',
           output    = 'hello<br />world!',
           outcome   = sanitize(input, { list: whitelist });
 
