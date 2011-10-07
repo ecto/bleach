@@ -44,7 +44,7 @@ var options = {
   list: whitelist
 }
 
-var html = bleach.sanitize(aBunchOfHTML);
+var html = bleach.sanitize(aBunchOfHTML, options);
 
 console.log(html);
 ````
