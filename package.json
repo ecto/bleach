@@ -2,7 +2,7 @@
   "author": "Cam Pedersen <cam@onswipe.com> (http://campedersen.com/)",
   "name": "bleach",
   "description": "A minimalistic HTML sanitizer",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "homepage": "https://github.com/ecto/bleach/issues",
   "repository": {
     "type": "git",
