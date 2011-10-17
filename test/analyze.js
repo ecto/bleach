@@ -9,15 +9,10 @@ vows.describe('bleach').addBatch({
     'is a function': function(analyze) {
       assert.equal(typeof analyze, 'function');
     },
-    'requires input': function(analyze) {
-      assert.throws(function(){
-        analyze();
-      }, Error);
-    },
-    'only accepts strings as HTML input': function(analyze) {
-      assert.throws(function(){
-        analyze(Object);
-      }, Error);
+    'returns blank array on invalid or missing input': function(analyze) {
+      assert.deepEqual(analyze({}), []);
+      assert.deepEqual(analyze([]), []);
+      assert.deepEqual(analyze(''), []);
     },
     'finds self-closing tags': function(analyze){
       assert.ok(analyze('<input type="text" />').length > 0);
@@ -35,11 +30,6 @@ vows.describe('bleach').addBatch({
     'is a function': function(sanitize) {
       assert.equal(typeof sanitize, 'function');
     },
-    'requires html to be passed in': function(sanitize){
-      assert.throws(function(){
-        sanitize();
-      }, Error);
-    },
     'does not require options to be passed in': function(sanitize){
       assert.doesNotThrow(function(){
         sanitize(' ');
@@ -48,10 +38,10 @@ vows.describe('bleach').addBatch({
     'returns a string': function(sanitize) {
       assert.isString(sanitize(' '));
     },
-    'only accepts strings as HTML input': function(sanitize) {
-      assert.throws(function(){
-        sanitize(Object);
-      }, Error);
+    'returns blank string on invalid or missing input': function(analyze) {
+      assert.isString(analyze({}));
+      assert.isString(analyze([]));
+      assert.isString(analyze(''));
     },
     'whitelist is respected': function(sanitize){
       var whitelist = ['br'],
@@ -76,34 +66,34 @@ vows.describe('bleach').addBatch({
 
   },
 
-  'bleach.youtube(html)': {
-    topic: function(){ return bleach.youtube; },
-    'is a function': function(sanitize) {
-      assert.equal(typeof sanitize, 'function');
+  'bleach.filter(html)': {
+    topic: function(){ return bleach.filter; },
+    'is a function': function(filter) {
+      assert.equal(typeof filter, 'function');
     },
-    'requires html to be passed in': function(youtube){
-      assert.throws(function(){
-        youtube();
+    'allows array or string to be passed in': function(filter){
+      assert.doesNotThrow(function(){
+        filter([]);
+        filter('');
       }, Error);
     },
-    'returns a string': function(youtube) {
-      assert.isString(youtube(' '));
+    'returns a string': function(filter) {
+      assert.isString(filter(' ', 'youtube'));
     },
-    'only accepts strings as HTML input': function(youtube) {
-      assert.throws(function(){
-        youtube(Object);
-      }, Error);
-    },
-    'converts a youtube flash object to an iframe': function(youtube){
+  },
+
+  'included youtube filter': {
+    topic: function(){ return bleach.filter; },
+    'converts a youtube flash object to an iframe': function(filter){
       var input = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="420" height="315" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><param name="src" value="http://www.youtube.com/v/aU079Mdkenw?version=3&amp;hl=en_US"><param name="allowfullscreen" value="true"><embed type="application/x-shockwave-flash" width="420" height="315" src="http://www.youtube.com/v/aU079Mdkenw?version=3&amp;hl=en_US" allowscriptaccess="always" allowfullscreen="true" id="s_media_1_0" name="s_media_1_0"></object>',
           output = '<iframe type="text/html" frameborder="0" scrolling="no" allowfullscreen src="http://youtube.com/embed/aU079Mdkenw"></iframe>';
 
-      assert.equal(youtube(input), output);
+      assert.equal(filter(input, 'youtube'), output);
     },
-    'ignores non-youtube flash objects': function(youtube){
+    'ignores non-youtube flash objects': function(filter){
       var input = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="420" height="315" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true"><param name="allowscriptaccess" value="always"><param name="src" value="http://www.youtube.com/v/aU079Mdkenw?version=3&amp;hl=en_US"><param name="allowfullscreen" value="true"><embed type="application/x-shockwave-flash" width="420" height="315" src="http://google.com/asdf" allowscriptaccess="always" allowfullscreen="true" id="s_media_1_0" name="s_media_1_0"></object>';
 
-      assert.equal(youtube(input), input);
+      assert.equal(filter(input, 'youtube'), input);
     },
   }
 
