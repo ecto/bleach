@@ -133,15 +133,6 @@ console.log(
 
 Refer to the filters directory for the template.
 
-
-### bleach.youtube(html)
-
-Convert valid YouTube flash embeds into HTML5-compliant iframe embeds.
-
-````javascript
-var html = bleach.youtube(html);
-````
-
 ## license
 
 (The MIT License)
