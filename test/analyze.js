@@ -80,6 +80,23 @@ vows.describe('bleach').addBatch({
     'returns a string': function(filter) {
       assert.isString(filter(' ', 'youtube'));
     },
+    'allow function to be passed in': function(filter){
+      var nyanFilter = function(html){
+        return 'nyan';
+      }
+      assert.equal(filter('nyannyannyan', nyanFilter), 'nyan');
+    },
+    'allow array of functions to be passed in': function(filter){
+      var filters = [
+        function(html){
+          return 'nyan';
+        },
+        function(html){
+          return html + html;
+        }
+      ];
+      assert.equal(filter('nyannyannyan', filters), 'nyannyan');
+    },
   },
 
   'included youtube filter': {
