@@ -13,5 +13,7 @@
     "node": "*"
   },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    vows: "0.5.x"
+  }
 }
