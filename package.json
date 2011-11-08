@@ -12,8 +12,10 @@
   "engines": {
     "node": "*"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ent": "0.0.x"
+  },
   "devDependencies": {
-    vows: "0.5.x"
+    "vows": "0.5.x"
   }
 }
