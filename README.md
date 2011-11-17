@@ -133,6 +133,10 @@ console.log(
 
 Refer to the filters directory for the template.
 
+## disclaimer
+
+This is not a port of the Python **bleach** library - in fact their implementations are very different.
+
 ## license
 
 (The MIT License)
