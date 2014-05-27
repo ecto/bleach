@@ -13,7 +13,7 @@
     "node": "*"
   },
   "dependencies": {
-    "ent": "0.0.x"
+    "he": "0.4.x"
   },
   "devDependencies": {
     "vows": "0.5.x"
